@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import Box from './Box.vue'
+import Box from './Box.vue';
 import { reactive } from '@vue/reactivity';
+import { gameRow, gameCol, startGame } from '../game';
 
-const map = reactive([])
+const map = reactive([]);
+
+startGame(map)
 </script>
 <template>
     <div>
-        <div class="row" v-for="row in 10" :key="row">
-            <div v-for="col in 10" :key="col">
+        <div class="row" v-for="row in gameRow" :key="row">
+            <div v-for="col in gameCol" :key="col">
                 <Box :type="map[row - 1][col - 1]"></Box>
             </div>
         </div>
