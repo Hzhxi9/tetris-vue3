@@ -1,3 +1,8 @@
+/**
+ * 
+ * @param matrix 
+ * @returns 
+ */
 export function getBottomPoints(matrix) {
     const points: any = []
     const row = matrix.length
