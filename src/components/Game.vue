@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Box from './Box.vue';
-import { reactive } from '@vue/reactivity';
+import { reactive } from 'vue';
 import { gameRow, gameCol, startGame } from '../game';
 
 const map = reactive([]);

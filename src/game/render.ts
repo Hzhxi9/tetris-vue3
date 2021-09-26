@@ -8,7 +8,7 @@ export function render(box, map) {
 
     for (let i = 0, len = box.shape.length; i < len; i++) {
         for (let j = 0, boxLen = box.shape.length; j < boxLen; j++) {
-            const row = i + box.j;
+            const row = i + box.y;
             const col = j + box.x;
             map[row][col] = 1
         }

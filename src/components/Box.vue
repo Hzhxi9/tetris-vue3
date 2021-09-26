@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "@vue/reactivity";
+import { computed } from "vue";
 
 const props = defineProps({
   type: {
@@ -8,7 +8,6 @@ const props = defineProps({
   },
 });
 const typeToColorMap: any = {
-  [-1]: "red",
   [0]: "gray",
   [1]: "red",
 };

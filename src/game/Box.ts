@@ -1,4 +1,4 @@
-export class Box {
+export default class Box {
     shape: number[][];
     x: number;
     y: number;
