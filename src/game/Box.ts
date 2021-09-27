@@ -23,6 +23,7 @@ export default class Box {
     rotate() {
         const rotateHandle: Function = this._rotates[this._rotateIdx];
         if (!rotateHandle) return;
+        this.shape = rotateHandle(this.shape)
         this._rotateIdx++;
         if (this._rotateIdx >= this._rotates.length) this._rotateIdx = 0
     }
