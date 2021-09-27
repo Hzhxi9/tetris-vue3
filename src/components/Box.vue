@@ -8,6 +8,7 @@ const props = defineProps({
   },
 });
 const typeToColorMap: any = {
+  [-1]: 'red',
   [0]: "gray",
   [1]: "red",
 };
