@@ -1,49 +1,55 @@
-import { createBox } from "./Box";
-import { hitBottomBoundary, hitBottomBox } from "./hit";
-import { initMap, eliminateLine, addBoxToMap } from "./map";
-import { render } from "./render";
+import Game from "./Game";
+import Rival from './Rival';
+import Player from './Player';
+
+import { initMap } from "./map";
 import { addTicker } from "./ticker";
-import { intervalTimer } from "./utils";
+import { createBox, createBoxByType } from "./Box";
+import { initMessage, message } from "./message";
 
 export * from "./config";
 
-let activeBox;
-export function startGame(map: number[][]) {
-    /**初始化地图 */
-    initMap(map);
+let selfGame: Game;
+let rivalGame: Game;
+let player: Player;
+let rival: Rival;
 
-    /*创建一个盒子 */
-    activeBox = createBox();
+export function initSelfGame(map) {
+    const box = createBox();
 
-    let timeInterval = 1000;
-    const isDown = intervalTimer(timeInterval);
-    function handleTicker(n) {
-        if (isDown(n)) moveDown(activeBox, map);
-        render(activeBox, map);
-    }
-    addTicker(handleTicker);
+    selfGame = new Game(box, initMap(map));
+    player = new Player(selfGame);
 
-    window.addEventListener('keydown', (e) => {
-        switch (e.code) {
-            case 'ArrowLeft':
-                activeBox.x--
-                break;
-            case 'ArrowRight':
-                activeBox.x++
-                break;
-            case 'ArrowUp':
-                activeBox.rotate()
-                break;
+    message.emit('initSelfGame', {
+        box: {
+            type: box.type,
         }
     })
 }
 
-export function moveDown(box, map) {
-    if (hitBottomBoundary(box, map) || hitBottomBox(box, map)) {
-        addBoxToMap(box, map);
-        eliminateLine(map);
-        activeBox = createBox();
-        return;
-    }
-    box.y++
+export function initRivalGame(map) {
+    rivalGame = new Game(null, initMap(map));
+    rival = new Rival(rivalGame);
+
+    message.on('initSelfGame', (info) => {
+        rivalGame.setBox(createBoxByType(info.box.type))
+    })
 }
+
+let isStarted = false
+export function startGame() {
+    isStarted = true;
+    player.start()
+}
+
+
+export function initGame() {
+    initMessage()
+}
+
+
+addTicker(() => {
+    if (!isStarted) return;
+    selfGame.render();
+    rivalGame.render();
+})

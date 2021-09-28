@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import Game from './components/Game.vue'
+import { startGame } from './game';
+
+function start(){
+  startGame()
+}
 </script>
 
 <template>
