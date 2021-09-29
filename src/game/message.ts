@@ -3,7 +3,7 @@ import { io } from 'socket.io-client';
 let socket;
 
 export function initMessage() {
-    socket = io('http://localhost:3000');
+    socket = io('http://localhost:3002');
     socket.on('connect', () => {
         console.log('连接成功')
     })

@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import Box from './Box.vue';
 import { reactive } from 'vue';
-import { gameRow, gameCol, startGame } from '../game';
+import { gameRow, gameCol, initSelfGame, initRivalGame } from '../game';
 
 const map = reactive([]);
+const props = defineProps(["type"])
 
-startGame(map)
+if(props.type === 'self') initSelfGame(map)
+else if(props.type === 'rival') initRivalGame(map)
 </script>
 <template>
     <div>

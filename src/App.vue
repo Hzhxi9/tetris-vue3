@@ -2,13 +2,25 @@
 import Game from './components/Game.vue'
 import { startGame } from './game';
 
-function start(){
+function start() {
   startGame()
 }
 </script>
 
 <template>
-  <Game />
+  <div class="root">
+    <div>
+      自己
+      <Game type="self"></Game>
+    </div>
+
+    <div>
+      对手
+      <Game type="rival"></Game>
+    </div>
+
+    <button @click="start">startGame</button>
+  </div>
 </template>
 
 <style >
@@ -17,8 +29,9 @@ function start(){
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-
   margin-top: 60px;
 }
-
+.root{
+  display: flex
+}
 </style>

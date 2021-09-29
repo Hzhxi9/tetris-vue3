@@ -12,7 +12,7 @@ export function render(box, map) {
 export function _render(box, map) {
     /**渲染移动方块的位置 */
     for (let i = 0, len = box.shape.length; i < len; i++) {
-        for (let j = 0, boxLen = box.shape.length; j < boxLen; j++) {
+        for (let j = 0, boxLen = box.shape[0].length; j < boxLen; j++) {
             const row = i + box.y;
             const col = j + box.x;
 
